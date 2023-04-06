@@ -1,0 +1,21 @@
+---
+- name: Install and configure Apache
+  hosts: webservers
+  become: true
+
+  tasks:
+  - name: Install Apache
+    apt: name=apache2 state=present
+
+  - name: Copy Apache config file
+    template:
+      src: apache.conf.j2
+      dest: /etc/apache2/apache2.conf
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: Restart Apache
+    service:
+      name: apache2
+      state: restarted
