@@ -1,0 +1,4 @@
+- name: Install myapp package
+  apt:
+    name: myapp
+    state: present 
